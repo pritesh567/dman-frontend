@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { mobileRegex } from '../Helpers/commonFunctions';
+import { mobileRegex } from '../../Helpers/commonFunctions';
 
 const Contact = () => {
   const [query, setQuery] = useState('');
