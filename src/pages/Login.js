@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginRequest } from '../redux/actions/userActions';
+import { useNavigate, useNavigation } from 'react-router';
 
 const Login = () => {
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { loading, error } = useSelector((state) => state.user);
 
   const handleLogin = (e) => {
@@ -13,10 +16,17 @@ const Login = () => {
     // dispatch(loginRequest({ email, password }));
   };
 
+  const handleSignupRedirect = () => {
+    navigate('/register'); // Navigate to the signup page
+  };
+
+
+
   return (
     <div className="container mt-5">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
+   
         <input
           type="email"
           placeholder="Email"
@@ -38,6 +48,12 @@ const Login = () => {
         </button>
       </form>
       {error && <p className="text-danger mt-3">{error}</p>}
+      <p className="mt-3">
+        Don't have an account?{' '}
+        <button onClick={handleSignupRedirect} className="btn btn-link p-0">
+          Sign up
+        </button>
+      </p>
     </div>
   );
 };

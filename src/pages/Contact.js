@@ -1,20 +1,33 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { mobileRegex } from '../Helpers/commonFunctions';
 
 const Contact = () => {
   const [query, setQuery] = useState('');
+    const [mobile, setMobile] = useState('');
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post('/api/users/query', { query })
-      .then(() => alert('Query submitted!'))
-      .catch(err => console.error(err));
+    if (!mobileRegex.test(mobile)) {
+      alert('Please enter a valid mobile number (10 digits).');
+      return;
+    }
   };
 
   return (
     <div className="container mt-5">
       <h2>Contact Us</h2>
       <form onSubmit={handleSubmit}>
+      <input
+          type="phone"
+          placeholder="Mobile Number"
+          value={mobile}
+          onChange={(e) => setMobile(e.target.value)}
+          className="form-control mb-3"
+          required
+         maxLength={10}
+        />
         <textarea
           className="form-control mb-3"
           placeholder="Enter your query"

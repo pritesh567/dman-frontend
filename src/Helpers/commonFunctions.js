@@ -1,0 +1,1 @@
+export const mobileRegex = /^[0-9]{10}$/;
